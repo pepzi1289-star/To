@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Stock</title></head><body>
+<h2>เช็กสต๊อก</h2>
+<input id=n placeholder="สินค้า"><input id=q type=number placeholder="จำนวน"><button onclick="add()">บันทึก</button>
+<table border=1><thead><tr><th>สินค้า</th><th>จำนวน</th><th></th></tr></thead><tbody id=t></tbody></table>
+<script>
+let d=JSON.parse(localStorage.stock||'[]');
+function save(){localStorage.stock=JSON.stringify(d);render();}
+function add(){d.push({n:n.value,q:q.value});n.value='';q.value='';save();}
+function del(i){d.splice(i,1);save();}
+function render(){t.innerHTML='';d.forEach((x,i)=>t.innerHTML+=`<tr><td>${x.n}</td><td>${x.q}</td><td><button onclick="del(${i})">ลบ</button></td></tr>`)}
+render();
+</script></body></html>
